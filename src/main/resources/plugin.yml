@@ -1,0 +1,14 @@
+name: GOLD-Koza
+version: '1.0-SNAPSHOT'
+main: pl.maniek.goldKoza.Main
+api-version: '1.18'
+authors: [ Maniek ]
+description: Plugin na Koze
+website: DC.GOLD-PLUGINS.PL
+
+depend:
+  - TAB
+
+commands:
+  koza:
+    description: koza
