@@ -13,3 +13,5 @@ depend:
 commands:
   koza:
     description: koza
+    aliases:
+      - goat
