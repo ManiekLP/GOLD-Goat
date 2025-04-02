@@ -1,4 +1,4 @@
-name: GOLD-Koza
+name: GOLD-Goat
 version: '1.0-SNAPSHOT'
 main: pl.maniek.goldKoza.Main
 api-version: '1.18'
@@ -7,6 +7,7 @@ description: Plugin na Koze
 website: DC.GOLD-PLUGINS.PL
 
 depend:
+  - PlaceholderAPI
   - TAB
 
 commands:

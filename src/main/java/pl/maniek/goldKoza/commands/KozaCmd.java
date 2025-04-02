@@ -23,11 +23,11 @@ public class KozaCmd
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
         if (!sender.hasPermission("gold.koza.admin")) {
-            sender.sendMessage(ChatUtil.fixColor(this.message.noPermission));
+            sender.sendMessage(ChatUtil.fixColor(message.noPermission));
             return false;
         }
         if (args.length == 0) {
-            sender.sendMessage(ChatUtil.fixColor(this.message.usage.replace("{CMD}", cmd.getName())));
+            sender.sendMessage(ChatUtil.fixColor(message.usage.replace("{CMD}", cmd.getName())));
             return false;
         }
         switch (args[0].toLowerCase()) {
@@ -36,13 +36,12 @@ public class KozaCmd
                 return true;
             }
             case "setspawn": {
-                if (sender instanceof Player) {
-                    Player player = (Player)sender;
-                    this.config.setKozaSpawn(player.getLocation());
-                    this.config.save();
-                    player.sendMessage(ChatUtil.fixColor(this.message.SpawnSetSucces));
+                if (sender instanceof Player player) {
+                    config.setKozaSpawn(player.getLocation());
+                    config.save();
+                    player.sendMessage(ChatUtil.fixColor(message.spawnSetSucces));
                 } else {
-                    sender.sendMessage(ChatUtil.fixColor("&cNie mo\u017cesz u\u017cy\u0107 tej komendy z poziomu konsoli!"));
+                    sender.sendMessage(ChatUtil.fixColor("&cNie możesz użyć tej komendy z poziomu konsoli!"));
                 }
                 return true;
             }
@@ -50,19 +49,19 @@ public class KozaCmd
                 if (this.config.getKozaSpawn() == null) {
                     sender.sendMessage(ChatUtil.fixColor(this.message.notSetSpawn));
                 } else if (this.kozaManager.isKozaSpawned()) {
-                    sender.sendMessage(ChatUtil.fixColor("&cKoza jest ju\u017c zrespiona!"));
+                    sender.sendMessage(ChatUtil.fixColor("&cKoza jest już zrespiona!"));
                 } else {
                     this.kozaManager.spawnKoza();
-                    sender.sendMessage(ChatUtil.fixColor("&aPomy\u015blnie zrespi\u0142e\u015b koz\u0119!"));
+                    sender.sendMessage(ChatUtil.fixColor("&aPomyślnie zrespiłeś kozę!"));
                 }
                 return true;
             }
             case "kill": {
                 if (this.kozaManager.isKozaSpawned()) {
                     this.kozaManager.killKoze();
-                    sender.sendMessage(ChatUtil.fixColor("&aPomy\u015blnie zabi\u0142e\u015b wszystkie kozy!"));
+                    sender.sendMessage(ChatUtil.fixColor("&aPomyślnie zabiłeś wszystkie kozy!"));
                 } else {
-                    sender.sendMessage(ChatUtil.fixColor("&cNie ma zrespionych k\u00f3z do zabicia."));
+                    sender.sendMessage(ChatUtil.fixColor("&cNie ma zrespionych kóz do zabicia."));
                 }
                 return true;
             }
@@ -73,7 +72,7 @@ public class KozaCmd
 
     @Nullable
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        ArrayList<String> completions = new ArrayList<String>();
+        ArrayList<String> completions = new ArrayList<>();
         if (sender.hasPermission("gold.koza.admin") && args.length == 1) {
             completions.add("reload");
             completions.add("setspawn");
@@ -88,10 +87,9 @@ public class KozaCmd
             long start = System.currentTimeMillis();
             this.config.load();
             this.message.load();
-            sender.sendMessage(ChatUtil.fixColor("&aKonfiguracja pluginu zosta\u0142a pomy\u015blnie za\u0142adowana! " + TimeUtil.convertMills(System.currentTimeMillis() - start)));
+            sender.sendMessage(ChatUtil.fixColor(message.reloaded + TimeUtil.convertMills(System.currentTimeMillis() - start)));
         } catch (Exception e) {
-            e.printStackTrace();
-            sender.sendMessage(ChatUtil.fixColor("&cWyst\u0105pi\u0142 b\u0142\u0105d podczas wczytywania konfiguracji pluginu!"));
+            sender.sendMessage(ChatUtil.fixColor(message.reloadError + e.getMessage()));
         }
     }
 }

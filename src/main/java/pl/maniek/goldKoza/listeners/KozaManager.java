@@ -2,31 +2,23 @@ package pl.maniek.goldKoza.listeners;
 
 import java.util.*;
 
-import me.neznamy.tab.api.TabAPI;
-import me.neznamy.tab.api.placeholder.PlaceholderManager;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarFlag;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Goat;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
+import me.neznamy.tab.api.*;
+import me.neznamy.tab.api.placeholder.*;
+import org.bukkit.*;
+import org.bukkit.boss.*;
+import org.bukkit.entity.*;
+import org.bukkit.event.*;
+import org.bukkit.event.entity.*;
 import org.bukkit.util.Vector;
-import pl.maniek.goldKoza.Main;
-import pl.maniek.goldKoza.configs.PluginConfig;
-import pl.maniek.goldKoza.utils.ChatUtil;
+import pl.maniek.goldKoza.*;
+import pl.maniek.goldKoza.configs.*;
+import pl.maniek.goldKoza.utils.*;
 
 public class KozaManager implements Listener {
     private final PluginConfig config;
     private int actualHP;
     private Goat kozaList;
-    private Map<UUID, Integer> damageTracker = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> damageTracker = new HashMap<>();
     private BossBar bossBars;
     private Integer hitCounter = 0;
 
@@ -39,7 +31,7 @@ public class KozaManager implements Listener {
         int HP = this.config.getKozaHP();
         String kozaName = ChatUtil.fixColor(this.config.getKozaName());
 
-        Goat koza = location.getWorld().spawn(location, Goat.class);
+        Goat koza = Objects.requireNonNull(location.getWorld()).spawn(location, Goat.class);
         koza.setCustomName(kozaName);
         koza.setCustomNameVisible(true);
         this.actualHP = HP;
@@ -48,7 +40,7 @@ public class KozaManager implements Listener {
         BarStyle barStyle = this.config.bossBarConfig.getStyle();
         String barName = this.config.bossBarConfig.getText().replace("{HP}", String.valueOf(HP));
         this.registerCustomPlaceholders();
-        BossBar bossBar = Bukkit.createBossBar((String)ChatUtil.fixColor(barName), (BarColor)barColor, (BarStyle)barStyle, (BarFlag[])new BarFlag[0]);
+        BossBar bossBar = Bukkit.createBossBar(ChatUtil.fixColor(barName), barColor, barStyle);
         bossBar.setProgress(1.0);
         bossBar.setVisible(true);
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -68,7 +60,7 @@ public class KozaManager implements Listener {
             this.bossBars.removeAll();
         }
         this.kozaList = null;
-        this.damageTracker = new HashMap<UUID, Integer>();
+        this.damageTracker = new HashMap<>();
         this.bossBars = null;
         this.hitCounter = 0;
     }
@@ -84,12 +76,10 @@ public class KozaManager implements Listener {
     @EventHandler
     public void onKozaDamage(EntityDamageByEntityEvent event) {
         Entity entity = event.getEntity();
-        if (entity instanceof Goat) {
-            Goat koza = (Goat)entity;
+        if (entity instanceof Goat koza) {
             if (entity.getCustomName() != null && this.kozaList != null) {
                 Entity entity2 = event.getDamager();
-                if (entity2 instanceof Player) {
-                    Player player = (Player)entity2;
+                if (entity2 instanceof Player player) {
                     --this.actualHP;
                     event.setDamage(0.0);
                     this.damageTracker.put(player.getUniqueId(), this.damageTracker.getOrDefault(player.getUniqueId(), 0) + 1);
@@ -98,7 +88,6 @@ public class KozaManager implements Listener {
                         bossBar.setProgress((double)this.actualHP / (double)this.config.getKozaHP());
                         bossBar.setTitle(ChatUtil.fixColor(this.config.bossBarConfig.getText().replace("{HP}", String.valueOf(this.actualHP)).replace("{MAX_HP}", String.valueOf(this.config.getKozaHP()))));
                     }
-                    Integer n = this.hitCounter;
                     this.hitCounter = this.hitCounter + 1;
                     if (this.hitCounter % this.config.odrzutCzestotliwosc == 0) {
                         this.knockBackNearbyPlayers(koza);

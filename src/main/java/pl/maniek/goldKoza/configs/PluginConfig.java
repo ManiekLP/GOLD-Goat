@@ -1,29 +1,20 @@
 package pl.maniek.goldKoza.configs;
 
-import eu.okaeri.configs.OkaeriConfig;
-import eu.okaeri.configs.annotation.Comment;
-import eu.okaeri.configs.annotation.Header;
-import eu.okaeri.configs.annotation.Headers;
-import eu.okaeri.configs.annotation.NameModifier;
-import eu.okaeri.configs.annotation.NameStrategy;
-import eu.okaeri.configs.annotation.Names;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import eu.okaeri.configs.*;
+import eu.okaeri.configs.annotation.*;
+import java.util.*;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.bukkit.Location;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
-import pl.maniek.goldKoza.utils.config.Configuration;
-import pl.maniek.goldKoza.utils.config.message.BossBarConfig;
+import lombok.*;
+import org.bukkit.*;
+import org.bukkit.boss.*;
+import pl.maniek.goldKoza.utils.config.*;
+import pl.maniek.goldKoza.utils.config.message.*;
 
 @Getter
 @Setter
-@Configuration(child="Config.yml")
-@Headers(value={@Header(value={"## GOLD-KOZA (Main-Config) ##"}), @Header(value={"# W razie b\u0142\u0119d\u00f3w napisz do nas na discordzie: DC.GOLD-PLUGINS.PL"})})
-@Names(strategy=NameStrategy.HYPHEN_CASE, modifier=NameModifier.TO_LOWER_CASE)
+@Configuration(child = "Config.yml")
+@Headers({ @Header({ "## GOLD-Goat (Main-Config) ##" }), @Header({ "# W razie błędów napisz do nas na discordzie: DC.GOLD-PLUGINS.PL" }) })
+@Names(strategy = NameStrategy.HYPHEN_CASE, modifier = NameModifier.TO_LOWER_CASE)
 public class PluginConfig extends OkaeriConfig {
 
     @Comment(value={"Nagrody za topki", "numer topki: komendy"})
@@ -38,11 +29,11 @@ public class PluginConfig extends OkaeriConfig {
     public BossBarConfig bossBarConfig;
     @Comment(value={"Ustawienia odrzucenia!", "Podrzucenie"})
     public double odrzutY;
-    @Comment(value={"Si\u0142a odrzutu"})
+    @Comment(value={"Siła odrzutu"})
     public int odrzutSila;
-    @Comment(value={"Zasi\u0119g pobierania graczy"})
+    @Comment(value={"Zasięg pobierania graczy"})
     public int odrzutZasieg;
-    @Comment(value={"Co ile uderze\u0144 (co ile uderze\u0144)"})
+    @Comment(value={"Co ile uderzeń (co ile uderzeń)"})
     public int odrzutCzestotliwosc;
 
     public PluginConfig() {
@@ -54,7 +45,7 @@ public class PluginConfig extends OkaeriConfig {
         this.kozaHP = 500;
         this.kozaSpawn = null;
         this.kozaName = "&bKOZA";
-        this.bossBarConfig = new BossBarConfig(true, "&a\u017bycie lamy {HP}", BarColor.GREEN, BarStyle.SOLID, 0);
+        this.bossBarConfig = new BossBarConfig(true, "&aŻycie lamy {HP}", BarColor.GREEN, BarStyle.SOLID, 0);
         this.odrzutY = 2.0;
         this.odrzutSila = 5;
         this.odrzutZasieg = 5;

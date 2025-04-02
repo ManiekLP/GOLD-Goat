@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.maniek</groupId>
-    <artifactId>gold-koza</artifactId>
+    <artifactId>gold-goat</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>gold-koza</name>
+    <name>GOLD-Goat</name>
 
     <properties>
         <java.version>17</java.version>
