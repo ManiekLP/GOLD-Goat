@@ -17,23 +17,23 @@ import pl.maniek.goldKoza.utils.config.message.*;
 @Names(strategy = NameStrategy.HYPHEN_CASE, modifier = NameModifier.TO_LOWER_CASE)
 public class PluginConfig extends OkaeriConfig {
 
-    @Comment(value={"Nagrody za topki", "numer topki: komendy"})
+    @Comment({"Nagrody za topki", "numer topki: komendy"})
     public Map<Integer, List<String>> kozaRewards;
-    @Comment(value={"HP kozy"})
+    @Comment({"HP kozy"})
     public int kozaHP;
-    @Comment(value={"Miejsce Spawnu"})
+    @Comment({"Miejsce Spawnu"})
     public Location kozaSpawn;
-    @Comment(value={"Nazwa kozy"})
+    @Comment({"Nazwa kozy"})
     public String kozaName;
-    @Comment(value={"BossBar"})
+    @Comment({"BossBar"})
     public BossBarConfig bossBarConfig;
-    @Comment(value={"Ustawienia odrzucenia!", "Podrzucenie"})
+    @Comment({"Ustawienia odrzucenia!", "Podrzucenie"})
     public double odrzutY;
-    @Comment(value={"Siła odrzutu"})
+    @Comment({"Siła odrzutu"})
     public int odrzutSila;
-    @Comment(value={"Zasięg pobierania graczy"})
+    @Comment({"Zasięg pobierania graczy"})
     public int odrzutZasieg;
-    @Comment(value={"Co ile uderzeń (co ile uderzeń)"})
+    @Comment({"Co ile uderzeń (co ile uderzeń)"})
     public int odrzutCzestotliwosc;
 
     public PluginConfig() {

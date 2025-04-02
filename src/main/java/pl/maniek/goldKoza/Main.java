@@ -40,12 +40,12 @@ public final class Main extends JavaPlugin {
 
     private void registerListeners() {
         this.getServer().getPluginManager().registerEvents(kozaManager, this);
-        this.getLogger().info("Zarejestrowano eventy");
+        this.getLogger().info("Listeners loaded!");
     }
 
     private void registerCommands() {
         Objects.requireNonNull(this.getCommand("koza")).setExecutor(new KozaCmd());
-        this.getLogger().info("Zarejestrowano komendy");
+        this.getLogger().info("Commands loaded!");
     }
 
     private void loadConfig() {

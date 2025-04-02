@@ -41,7 +41,7 @@ public class KozaCmd
                     config.save();
                     player.sendMessage(ChatUtil.fixColor(message.spawnSetSucces));
                 } else {
-                    sender.sendMessage(ChatUtil.fixColor("&cNie możesz użyć tej komendy z poziomu konsoli!"));
+                    sender.sendMessage(ChatUtil.fixColor(message.consoleUseError));
                 }
                 return true;
             }
@@ -49,19 +49,19 @@ public class KozaCmd
                 if (this.config.getKozaSpawn() == null) {
                     sender.sendMessage(ChatUtil.fixColor(this.message.notSetSpawn));
                 } else if (this.kozaManager.isKozaSpawned()) {
-                    sender.sendMessage(ChatUtil.fixColor("&cKoza jest już zrespiona!"));
+                    sender.sendMessage(ChatUtil.fixColor(message.spawnError));
                 } else {
                     this.kozaManager.spawnKoza();
-                    sender.sendMessage(ChatUtil.fixColor("&aPomyślnie zrespiłeś kozę!"));
+                    sender.sendMessage(ChatUtil.fixColor(message.spawnSucces));
                 }
                 return true;
             }
             case "kill": {
                 if (this.kozaManager.isKozaSpawned()) {
                     this.kozaManager.killKoze();
-                    sender.sendMessage(ChatUtil.fixColor("&aPomyślnie zabiłeś wszystkie kozy!"));
+                    sender.sendMessage(ChatUtil.fixColor(message.killSucces));
                 } else {
-                    sender.sendMessage(ChatUtil.fixColor("&cNie ma zrespionych kóz do zabicia."));
+                    sender.sendMessage(ChatUtil.fixColor(message.killNoTarget));
                 }
                 return true;
             }
