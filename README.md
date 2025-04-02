@@ -14,8 +14,8 @@
 - Testowane na 1.18.2 i 1.19.4
 - Java 18+
 ### Wymagania:
-- PlaceholderAPI
-- TAB
+- PlaceholderAPI - https://www.spigotmc.org/resources/placeholderapi.6245/
+- TAB - https://www.spigotmc.org/resources/tab-1-5-1-21-5.57806/
 ### Config Scoreboard:
 ```yaml
   scoreboards:
