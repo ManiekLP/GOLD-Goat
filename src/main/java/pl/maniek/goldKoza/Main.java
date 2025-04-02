@@ -1,10 +1,13 @@
 package pl.maniek.goldKoza;
 
-import eu.okaeri.configs.ConfigManager;
-import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer;
-import eu.okaeri.configs.yaml.bukkit.serdes.SerdesBukkit;
-import java.io.File;
-import org.bukkit.plugin.java.JavaPlugin;
+import eu.okaeri.configs.*;
+import eu.okaeri.configs.yaml.bukkit.*;
+import eu.okaeri.configs.yaml.bukkit.serdes.*;
+import java.io.*;
+import java.util.*;
+
+import lombok.*;
+import org.bukkit.plugin.java.*;
 import pl.maniek.goldKoza.commands.*;
 import pl.maniek.goldKoza.configs.*;
 import pl.maniek.goldKoza.listeners.*;
@@ -13,6 +16,7 @@ public final class Main extends JavaPlugin {
 
     private static PluginConfig config;
     private static MessageConfig message;
+    @Getter
     private static KozaManager kozaManager;
 
     public static Main getInstance() {
@@ -25,10 +29,6 @@ public final class Main extends JavaPlugin {
 
     public static MessageConfig getMessageConfig() {
         return message;
-    }
-
-    public static KozaManager getKozaManager() {
-        return kozaManager;
     }
 
     public void onEnable() {
@@ -44,7 +44,7 @@ public final class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("koza").setExecutor(new KozaCmd());
+        Objects.requireNonNull(this.getCommand("koza")).setExecutor(new KozaCmd());
         this.getLogger().info("Zarejestrowano komendy");
     }
 
