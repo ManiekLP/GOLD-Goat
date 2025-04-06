@@ -17,6 +17,7 @@
 - PlaceholderAPI - https://www.spigotmc.org/resources/placeholderapi.6245/
 - TAB - https://www.spigotmc.org/resources/tab-1-5-1-21-5.57806/
 ### Config Scoreboard:
+PL:
 ```yaml
   scoreboards:
     scoreboard_boss:
@@ -28,6 +29,29 @@
       - '&7Lokalizacja: &f%GOLD-Koza_boss-location%'
       - ''
       - '&eNagrody otrzymają:'
+      - '1. %GOLD-Koza_boss-damage-top-1%'
+      - '2. %GOLD-Koza_boss-damage-top-2%'
+      - '3. %GOLD-Koza_boss-damage-top-3%'
+      - '4. %GOLD-Koza_boss-damage-top-4%'
+      - '5. %GOLD-Koza_boss-damage-top-5%'
+      - ''
+```
+EN:
+```yaml
+  scoreboards:
+    scoreboard_boss:
+      display-condition: "%GOLD-Koza_boss-spawned%=1"
+      title: "&f              &f&lYourIP.&e&lnet&f              &f"
+      lines:
+      - '%GOLD-Koza_boss-name% &7has respawned!'
+
+      - '&7It is located at /warp event!'
+
+      - '&7Location: &f%GOLD-Koza_boss-location%'
+
+      - ''
+      - '&eThe following will receive the rewards:'
+
       - '1. %GOLD-Koza_boss-damage-top-1%'
       - '2. %GOLD-Koza_boss-damage-top-2%'
       - '3. %GOLD-Koza_boss-damage-top-3%'
