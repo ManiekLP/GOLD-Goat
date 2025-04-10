@@ -34,6 +34,8 @@ public class KozaManager implements Listener {
         Goat koza = Objects.requireNonNull(location.getWorld()).spawn(location, Goat.class);
         koza.setCustomName(kozaName);
         koza.setCustomNameVisible(true);
+        koza.setGlowing(true);
+        koza.setFireTicks(0);
         this.actualHP = HP;
 
         BarColor barColor = this.config.getBossBarConfig().getColor();
@@ -73,6 +75,21 @@ public class KozaManager implements Listener {
         }
     }
 
+    @EventHandler
+    public void onKozaDamageOther(EntityDamageEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof Goat && entity.getCustomName() != null && this.kozaList != null) {
+            if (event.getCause() == EntityDamageEvent.DamageCause.FIRE
+                    || event.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK
+                    || event.getCause() == EntityDamageEvent.DamageCause.LAVA
+                    || event.getCause() == EntityDamageEvent.DamageCause.HOT_FLOOR
+                    || event.getCause() == EntityDamageEvent.DamageCause.DROWNING
+                    || event.getCause() == EntityDamageEvent.DamageCause.FALL
+                    || event.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
+                event.setCancelled(true);
+            }
+        }
+    }
     @EventHandler
     public void onKozaDamage(EntityDamageByEntityEvent event) {
         Entity entity = event.getEntity();
